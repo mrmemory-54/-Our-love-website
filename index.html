@@ -158,10 +158,11 @@
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       transition: transform 0.2s;
+      cursor: pointer;
     }
 
     .photo-card:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
     }
 
     .photo-card img {
@@ -264,8 +265,41 @@
       animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
+    /* Lightbox modal for enlarged image */
+    .image-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 200;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .image-modal img {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: popIn 0.3s ease;
+    }
+
+    .image-modal .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: white;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     @keyframes popIn {
-      from { transform: scale(0.7); opacity: 0; }
+      from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
   </style>
@@ -299,7 +333,7 @@
         </div>
         <div class="envelope-card" onclick="openSection('dateView')">
           <div class="icon">🌹</div>
-          <span>question</span>
+          <span>Date?</span>
         </div>
       </div>
     </div>
@@ -308,13 +342,13 @@
       <button class="back-btn" onclick="openSection('homeView')">← Back to Envelopes</button>
       <h1>Our First Date 👩‍❤️‍👨</h1>
       <div class="photo-grid">
-        <div class="photo-card"><img src="https://i.ibb.co/rfKRztKK/image.jpg" alt="First Date 1" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/RGBnYM3G/image.jpg" alt="First Date 2" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/CszzwxGn/image.jpg" alt="First Date 3" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/dwW2N5mk/image.jpg" alt="First Date 4" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/Zzj0jjX8/image.jpg" alt="First Date 5" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/KpHJjGSp/image.jpg" alt="First Date 6" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/MkTTN1bq/image.jpg" alt="First Date 7" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/rfKRztKK/image.jpg" alt="First Date 1" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/RGBnYM3G/image.jpg" alt="First Date 2" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/CszzwxGn/image.jpg" alt="First Date 3" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/dwW2N5mk/image.jpg" alt="First Date 4" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/Zzj0jjX8/image.jpg" alt="First Date 5" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/KpHJjGSp/image.jpg" alt="First Date 6" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/MkTTN1bq/image.jpg" alt="First Date 7" /></div>
       </div>
     </div>
 
@@ -322,20 +356,20 @@
       <button class="back-btn" onclick="openSection('homeView')">← Back to Envelopes</button>
       <h1>Sweet Memories 📸</h1>
       <div class="photo-grid">
-        <div class="photo-card"><img src="https://i.ibb.co/RpdqKxwM/image.jpg" alt="Memory 1" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/pkjwG04/image.jpg" alt="Memory 2" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/60W0JKcc/image.jpg" alt="Memory 3" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/7xPXQXdL/image.jpg" alt="Memory 4" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/LXz5qmv2/image.jpg" alt="Memory 5" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/TDms3Rp2/image.jpg" alt="Memory 6" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/67xydG0j/image.jpg" alt="Memory 7" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/8DsTKmqM/image.jpg" alt="Memory 8" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/jvpgrJzp/image.jpg" alt="Memory 9" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/Kz7Z3Fmj/image.jpg" alt="Memory 10" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/XfsKyHRX/image.jpg" alt="Memory 11" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/5WTCP6c3/image.jpg" alt="Memory 12" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/vxzhVPns/image.jpg" alt="Memory 13" /></div>
-        <div class="photo-card"><img src="https://i.ibb.co/HDTDQ0jT/image.jpg" alt="Memory 14" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/RpdqKxwM/image.jpg" alt="Memory 1" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/pkjwG04/image.jpg" alt="Memory 2" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/60W0JKcc/image.jpg" alt="Memory 3" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/7xPXQXdL/image.jpg" alt="Memory 4" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/LXz5qmv2/image.jpg" alt="Memory 5" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/TDms3Rp2/image.jpg" alt="Memory 6" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/67xydG0j/image.jpg" alt="Memory 7" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/8DsTKmqM/image.jpg" alt="Memory 8" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/jvpgrJzp/image.jpg" alt="Memory 9" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/Kz7Z3Fmj/image.jpg" alt="Memory 10" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/XfsKyHRX/image.jpg" alt="Memory 11" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/5WTCP6c3/image.jpg" alt="Memory 12" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/vxzhVPns/image.jpg" alt="Memory 13" /></div>
+        <div class="photo-card" onclick="zoomImage(this)"><img src="https://i.ibb.co/HDTDQ0jT/image.jpg" alt="Memory 14" /></div>
       </div>
     </div>
 
@@ -377,12 +411,19 @@
 
   </div>
 
+  <!-- Popup for Date confirmation -->
   <div class="modal" id="popupModal">
     <div class="modal-content">
       <h2 style="font-family: 'Caveat', cursive; font-size: 2.5rem; color: #ff4d6d;">Yay! 🎉❤️</h2>
       <p style="margin: 15px 0; color: #4a4a4a;">It's a date! I can't wait to spend this special time with you!</p>
       <button class="btn-yes" onclick="closePopup()">See You Soon! 🥰</button>
     </div>
+  </div>
+
+  <!-- Image Lightbox Modal -->
+  <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+    <span class="close-btn">&times;</span>
+    <img id="enlargedImg" src="" alt="Enlarged View" />
   </div>
 
   <script>
@@ -407,6 +448,17 @@
     function closePopup() {
       document.getElementById('popupModal').style.display = 'none';
       openSection('homeView');
+    }
+
+    /* Image zoom function */
+    function zoomImage(element) {
+      const imgUrl = element.querySelector('img').src;
+      document.getElementById('enlargedImg').src = imgUrl;
+      document.getElementById('imageModal').style.display = 'flex';
+    }
+
+    function closeImageModal() {
+      document.getElementById('imageModal').style.display = 'none';
     }
 
     const heartsContainer = document.getElementById('heartsContainer');
