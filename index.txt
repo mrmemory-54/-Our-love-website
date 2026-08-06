@@ -1,0 +1,447 @@
+‎<!DOCTYPE html>
+‎<html lang="en">
+‎<head>
+‎  <meta charset="UTF-8" />
+‎  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+‎  <title>A Special Surprise for You ❤️</title>
+‎  <link rel="preconnect" href="https://fonts.googleapis.com">
+‎  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+‎  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+‎  <style>
+‎    * {
+‎      box-sizing: border-box;
+‎      margin: 0;
+‎      padding: 0;
+‎    }
+‎
+‎    body {
+‎      font-family: 'Poppins', sans-serif;
+‎      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+‎      min-height: 100vh;
+‎      display: flex;
+‎      flex-direction: column;
+‎      align-items: center;
+‎      justify-content: center;
+‎      padding: 20px;
+‎      color: #4a4a4a;
+‎    }
+‎
+‎    /* Floating Heart Animation */
+‎    .bg-hearts {
+‎      position: fixed;
+‎      top: 0;
+‎      left: 0;
+‎      width: 100%;
+‎      height: 100%;
+‎      pointer-events: none;
+‎      z-index: 0;
+‎      overflow: hidden;
+‎    }
+‎
+‎    .heart-bubble {
+‎      position: absolute;
+‎      bottom: -50px;
+‎      font-size: 20px;
+‎      animation: floatUp 8s linear infinite;
+‎      opacity: 0.6;
+‎    }
+‎
+‎    @keyframes floatUp {
+‎      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+‎      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+‎    }
+‎
+‎    .container {
+‎      position: relative;
+‎      z-index: 10;
+‎      width: 100%;
+‎      max-width: 850px;
+‎      background: rgba(255, 255, 255, 0.92);
+‎      backdrop-filter: blur(10px);
+‎      border-radius: 24px;
+‎      box-shadow: 0 15px 35px rgba(230, 80, 115, 0.2);
+‎      padding: 30px;
+‎      text-align: center;
+‎      margin: 20px 0;
+‎    }
+‎
+‎    h1 {
+‎      font-family: 'Caveat', cursive;
+‎      font-size: 2.8rem;
+‎      color: #e63946;
+‎      margin-bottom: 20px;
+‎    }
+‎
+‎    /* Envelope Nav Grid */
+‎    .envelope-grid {
+‎      display: grid;
+‎      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+‎      gap: 15px;
+‎      margin-top: 25px;
+‎    }
+‎
+‎    .envelope-card {
+‎      background: #ffffff;
+‎      border: 2px solid #ffccd5;
+‎      border-radius: 16px;
+‎      padding: 20px 15px;
+‎      cursor: pointer;
+‎      transition: all 0.3s ease;
+‎      display: flex;
+‎      flex-direction: column;
+‎      align-items: center;
+‎      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+‎    }
+‎
+‎    .envelope-card:hover {
+‎      transform: translateY(-5px);
+‎      border-color: #ff4d6d;
+‎      box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
+‎    }
+‎
+‎    .envelope-card .icon {
+‎      font-size: 2.2rem;
+‎      margin-bottom: 8px;
+‎    }
+‎
+‎    .envelope-card span {
+‎      font-weight: 600;
+‎      color: #d80032;
+‎      font-size: 0.95rem;
+‎    }
+‎
+‎    /* Section Views */
+‎    .section-view {
+‎      display: none;
+‎      animation: fadeIn 0.4s ease-in-out forwards;
+‎    }
+‎
+‎    .section-view.active {
+‎      display: block;
+‎    }
+‎
+‎    @keyframes fadeIn {
+‎      from { opacity: 0; transform: translateY(10px); }
+‎      to { opacity: 1; transform: translateY(0); }
+‎    }
+‎
+‎    .back-btn {
+‎      display: inline-flex;
+‎      align-items: center;
+‎      gap: 6px;
+‎      background: #ffccd5;
+‎      color: #c9184a;
+‎      border: none;
+‎      padding: 8px 16px;
+‎      border-radius: 20px;
+‎      font-weight: 600;
+‎      font-size: 0.85rem;
+‎      cursor: pointer;
+‎      margin-bottom: 20px;
+‎      transition: background 0.2s;
+‎    }
+‎
+‎    .back-btn:hover {
+‎      background: #ffb3c1;
+‎    }
+‎
+‎    /* Memories Gallery */
+‎    .photo-grid {
+‎      display: grid;
+‎      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+‎      gap: 15px;
+‎      margin-top: 15px;
+‎      max-height: 60vh;
+‎      overflow-y: auto;
+‎      padding: 10px;
+‎    }
+‎
+‎    .photo-card {
+‎      background: #fff;
+‎      padding: 10px;
+‎      border-radius: 12px;
+‎      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+‎      transition: transform 0.2s;
+‎    }
+‎
+‎    .photo-card:hover {
+‎      transform: scale(1.03);
+‎    }
+‎
+‎    .photo-card img {
+‎      width: 100%;
+‎      height: 180px;
+‎      object-fit: cover;
+‎      border-radius: 8px;
+‎    }
+‎
+‎    /* Letter Section */
+‎    .letter-paper {
+‎      background: #fffdf9;
+‎      border: 1px solid #f3e5ab;
+‎      padding: 30px;
+‎      border-radius: 12px;
+‎      font-family: 'Caveat', cursive;
+‎      font-size: 1.6rem;
+‎      line-height: 1.6;
+‎      color: #333;
+‎      text-align: left;
+‎      box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
+‎    }
+‎
+‎    /* Reasons List */
+‎    .reasons-list {
+‎      list-style: none;
+‎      text-align: left;
+‎      display: flex;
+‎      flex-direction: column;
+‎      gap: 12px;
+‎    }
+‎
+‎    .reasons-list li {
+‎      background: #fff0f3;
+‎      padding: 14px 18px;
+‎      border-radius: 12px;
+‎      border-left: 4px solid #ff4d6d;
+‎      font-size: 0.95rem;
+‎    }
+‎
+‎    /* Proposal / Date Section */
+‎    .date-card {
+‎      background: #fff;
+‎      padding: 30px;
+‎      border-radius: 16px;
+‎      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+‎    }
+‎
+‎    .date-buttons {
+‎      display: flex;
+‎      justify-content: center;
+‎      gap: 20px;
+‎      margin-top: 25px;
+‎    }
+‎
+‎    .btn-yes {
+‎      background: #ff4d6d;
+‎      color: white;
+‎      border: none;
+‎      padding: 12px 30px;
+‎      font-size: 1.1rem;
+‎      font-weight: 600;
+‎      border-radius: 25px;
+‎      cursor: pointer;
+‎      box-shadow: 0 4px 12px rgba(255, 77, 109, 0.4);
+‎      transition: transform 0.2s;
+‎    }
+‎
+‎    .btn-yes:hover {
+‎      transform: scale(1.08);
+‎    }
+‎
+‎    .btn-no {
+‎      background: #e0e0e0;
+‎      color: #666;
+‎      border: none;
+‎      padding: 12px 30px;
+‎      font-size: 1.1rem;
+‎      border-radius: 25px;
+‎      cursor: pointer;
+‎      position: relative;
+‎    }
+‎
+‎    /* Modal Popup */
+‎    .modal {
+‎      display: none;
+‎      position: fixed;
+‎      top: 0;
+‎      left: 0;
+‎      width: 100%;
+‎      height: 100%;
+‎      background: rgba(0,0,0,0.5);
+‎      z-index: 100;
+‎      justify-content: center;
+‎      align-items: center;
+‎    }
+‎
+‎    .modal-content {
+‎      background: white;
+‎      padding: 30px;
+‎      border-radius: 20px;
+‎      text-align: center;
+‎      max-width: 400px;
+‎      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+‎    }
+‎
+‎    @keyframes popIn {
+‎      from { transform: scale(0.7); opacity: 0; }
+‎      to { transform: scale(1); opacity: 1; }
+‎    }
+‎  </style>
+‎</head>
+‎<body>
+‎
+‎  <!-- Floating Background Hearts -->
+‎  <div class="bg-hearts" id="heartsContainer"></div>
+‎
+‎  <div class="container">
+‎    
+‎    <!-- HOME DASHBOARD VIEW -->
+‎    <div id="homeView" class="section-view active">
+‎      <h1>For Someone Very Special ❤️</h1>
+‎      <p style="color: #666; font-size: 0.95rem;">Tap an envelope to open your secret surprise!</p>
+‎      
+‎      <div class="envelope-grid">
+‎        <div class="envelope-card" onclick="openSection('firstDateView')">
+‎          <div class="icon">👩‍❤️‍👨</div>
+‎          <span>Our First Date</span>
+‎        </div>
+‎        <div class="envelope-card" onclick="openSection('sweetMemoriesView')">
+‎          <div class="icon">📸</div>
+‎          <span>Sweet Memories</span>
+‎        </div>
+‎        <div class="envelope-card" onclick="openSection('letterView')">
+‎          <div class="icon">💌</div>
+‎          <span>My Letter</span>
+‎        </div>
+‎        <div class="envelope-card" onclick="openSection('reasonsView')">
+‎          <div class="icon">✨</div>
+‎          <span>Why I Love You</span>
+‎        </div>
+‎        <div class="envelope-card" onclick="openSection('dateView')">
+‎          <div class="icon">🌹</div>
+‎          <span>Date Night?</span>
+‎        </div>
+‎      </div>
+‎    </div>
+‎
+‎    <!-- 1. OUR FIRST DATE SECTION -->
+‎    <div id="firstDateView" class="section-view">
+‎      <button class="back-btn" onclick="openSection('homeView')">← Back to Envelopes</button>
+‎      <h1>Our First Date 👩‍❤️‍👨</h1>
+‎      <div class="photo-grid">
+‎        <div class="photo-card"><img src="https://i.ibb.co/rfKRztKK/image.jpg" alt="First Date 1" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/RGBnYM3G/image.jpg" alt="First Date 2" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/CszzwxGn/image.jpg" alt="First Date 3" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/dwW2N5mk/image.jpg" alt="First Date 4" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/Zzj0jjX8/image.jpg" alt="First Date 5" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/KpHJjGSp/image.jpg" alt="First Date 6" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/MkTTN1bq/image.jpg" alt="First Date 7" /></div>
+‎      </div>
+‎    </div>
+‎
+‎    <!-- 2. SWEET MEMORIES SECTION -->
+‎    <div id="sweetMemoriesView" class="section-view">
+‎      <button class="back-btn" onclick="openSection('homeView')">← Back to Envelopes</button>
+‎      <h1>Sweet Memories 📸</h1>
+‎      <div class="photo-grid">
+‎        <div class="photo-card"><img src="https://i.ibb.co/RpdqKxwM/image.jpg" alt="Memory 1" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/pkjwG04/image.jpg" alt="Memory 2" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/60W0JKcc/image.jpg" alt="Memory 3" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/7xPXQXdL/image.jpg" alt="Memory 4" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/LXz5qmv2/image.jpg" alt="Memory 5" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/TDms3Rp2/image.jpg" alt="Memory 6" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/67xydG0j/image.jpg" alt="Memory 7" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/8DsTKmqM/image.jpg" alt="Memory 8" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/jvpgrJzp/image.jpg" alt="Memory 9" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/Kz7Z3Fmj/image.jpg" alt="Memory 10" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/XfsKyHRX/image.jpg" alt="Memory 11" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/5WTCP6c3/image.jpg" alt="Memory 12" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/vxzhVPns/image.jpg" alt="Memory 13" /></div>
+‎        <div class="photo-card"><img src="https://i.ibb.co/HDTDQ0jT/image.jpg" alt="Memory 14" /></div>
+‎      </div>
+‎    </div>
+‎
+‎    <!-- 3. MY LETTER SECTION -->
+‎    <div id="letterView" class="section-view">
+‎      <button class="back-btn" onclick="openSection('homeView')">← Back to Envelopes</button>
+‎      <h1>My Love Letter 💌</h1>
+‎      <div class="letter-paper">
+‎        My dear Biddya,<br><br>
+‎        Every single day with you feels like a beautiful dream. You bring so much light, laughter, and warmth into my life. Thank you for being my favorite person, my safest space, and my biggest joy.<br><br>
+‎        I created this little space just to remind you how much you mean to me.<br><br>
+‎        Forever & Always ❤️
+‎      </div>
+‎    </div>
+‎
+‎    <!-- 4. WHY I LOVE YOU SECTION -->
+‎    <div id="reasonsView" class="section-view">
+‎      <button class="back-btn" onclick="openSection('homeView')">← Back to Envelopes</button>
+‎      <h1>Why I Love You ✨</h1>
+‎      <ul class="reasons-list">
+‎        <li>💖 The way your smile instantly lights up the entire room.</li>
+‎        <li>💖 How you always know how to make me laugh when I need it most.</li>
+‎        <li>💖 Your gentle heart and how deeply you care for the people around you.</li>
+‎        <li>💖 All the simple, little everyday moments we share together.</li>
+‎      </ul>
+‎    </div>
+‎
+‎    <!-- 5. DO YOU WANT TO GO ON A DATE WITH ME?SECTION -->
+‎    <div id="dateView" class="section-view">
+‎      <button class="back-btn" onclick="openSection('homeView')">← Back to Envelopes</button>
+‎      <h1>A Special Question 🌹</h1>
+‎      <div class="date-card">
+‎        <h2 style="color: #ff4d6d; margin-bottom: 10px;">Will you go on a date with me?</h2>
+‎        <p style="color: #666;">I'd love to take you out for a special date night!</p>
+‎        
+‎        <div class="date-buttons">
+‎          <button class="btn-yes" onclick="showPopup()">YES! 💕</button>
+‎          <button class="btn-no" id="noBtn" onmouseover="moveButton()">No</button>
+‎        </div>
+‎      </div>
+‎    </div>
+‎
+‎  </div>
+‎
+‎  <!-- RSVP Celebration Popup -->
+‎  <div class="modal" id="popupModal">
+‎    <div class="modal-content">
+‎      <h2 style="font-family: 'Caveat', cursive; font-size: 2.5rem; color: #ff4d6d;">Yay! 🎉❤️</h2>
+‎      <p style="margin: 15px 0; color: #4a4a4a;">It's a date! I can't wait to spend this special time with you!</p>
+‎      <button class="btn-yes" onclick="closePopup()">See You Soon! 🥰</button>
+‎    </div>
+‎  </div>
+‎
+‎  <script>
+‎    // Section Switcher Function
+‎    function openSection(sectionId) {
+‎      document.querySelectorAll('.section-view').forEach(view => {
+‎        view.classList.remove('active');
+‎      });
+‎      document.getElementById(sectionId).classList.add('active');
+‎    }
+‎
+‎    // Playful "No" button movement
+‎    function moveButton() {
+‎      const btn = document.getElementById('noBtn');
+‎      const x = Math.random() * 140 - 70;
+‎      const y = Math.random() * 140 - 70;
+‎      btn.style.transform = `translate(${x}px, ${y}px)`;
+‎    }
+‎
+‎    // Modal popup triggers
+‎    function showPopup() {
+‎      document.getElementById('popupModal').style.display = 'flex';
+‎    }
+‎
+‎    function closePopup() {
+‎      document.getElementById('popupModal').style.display = 'none';
+‎      openSection('homeView');
+‎    }
+‎
+‎    // Generate Floating Hearts Background
+‎    const heartsContainer = document.getElementById('heartsContainer');
+‎    const heartIcons = ['❤️', '💖', '💕', '💗', '🌸'];
+‎
+‎    for (let i = 0; i < 25; i++) {
+‎      const heart = document.createElement('div');
+‎      heart.className = 'heart-bubble';
+‎      heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+‎      heart.style.left = Math.random() * 100 + 'vw';
+‎      heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
+‎      heart.style.animationDelay = Math.random() * 5 + 's';
+‎      heartsContainer.appendChild(heart);
+‎    }
+‎  </script>
+‎</body>
+‎</html>
+‎
