@@ -144,7 +144,7 @@
 
     .photo-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 15px;
       margin-top: 15px;
       max-height: 60vh;
@@ -154,22 +154,24 @@
 
     .photo-card {
       background: #fff;
-      padding: 10px;
+      padding: 8px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       transition: transform 0.2s;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .photo-card:hover {
-      transform: scale(1.05);
+    .photo-card:active {
+      transform: scale(0.96);
     }
 
     .photo-card img {
       width: 100%;
-      height: 180px;
+      height: 150px;
       object-fit: cover;
       border-radius: 8px;
+      pointer-events: none;
     }
 
     .letter-paper {
@@ -265,41 +267,53 @@
       animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* Lightbox modal for enlarged image */
+    /* Fixed Lightbox Modal size for BIGGER view */
     .image-modal {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 200;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.88);
+      z-index: 9999;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      flex-direction: column;
     }
 
     .image-modal img {
-      max-width: 90%;
-      max-height: 85vh;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      animation: popIn 0.3s ease;
+      width: 85vw;
+      max-width: 480px;
+      height: auto;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      animation: popIn 0.25s ease-out;
     }
 
     .image-modal .close-btn {
       position: absolute;
-      top: 20px;
+      top: 25px;
       right: 25px;
-      color: white;
-      font-size: 35px;
+      color: #ffffff;
+      font-size: 38px;
       font-weight: bold;
       cursor: pointer;
+      line-height: 1;
+      background: rgba(0, 0, 0, 0.4);
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
 
     @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
+      from { transform: scale(0.6); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
   </style>
@@ -411,7 +425,6 @@
 
   </div>
 
-  <!-- Popup for Date confirmation -->
   <div class="modal" id="popupModal">
     <div class="modal-content">
       <h2 style="font-family: 'Caveat', cursive; font-size: 2.5rem; color: #ff4d6d;">Yay! 🎉❤️</h2>
@@ -420,7 +433,6 @@
     </div>
   </div>
 
-  <!-- Image Lightbox Modal -->
   <div class="image-modal" id="imageModal" onclick="closeImageModal()">
     <span class="close-btn">&times;</span>
     <img id="enlargedImg" src="" alt="Enlarged View" />
@@ -450,11 +462,12 @@
       openSection('homeView');
     }
 
-    /* Image zoom function */
     function zoomImage(element) {
-      const imgUrl = element.querySelector('img').src;
-      document.getElementById('enlargedImg').src = imgUrl;
-      document.getElementById('imageModal').style.display = 'flex';
+      const img = element.querySelector('img');
+      if (img) {
+        document.getElementById('enlargedImg').src = img.src;
+        document.getElementById('imageModal').style.display = 'flex';
+      }
     }
 
     function closeImageModal() {
