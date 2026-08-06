@@ -174,7 +174,6 @@
       pointer-events: none;
     }
 
-    /* Music Section Styling */
     .playlist-container {
       display: flex;
       flex-direction: column;
@@ -328,7 +327,6 @@
       animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* Lightbox Modal with High-Quality Image Rendering */
     .image-modal {
       display: none;
       position: fixed;
@@ -454,17 +452,15 @@
         <div class="photo-card" onclick="zoomImage(this)"><img src="Messenger_creation_D09655C8-8BF1-4C74-8227-CF4424F1D825.jpeg" alt="Memory 16" /></div>
         <div class="photo-card" onclick="zoomImage(this)"><img src="Messenger_creation_DCEFD06E-1B80-4510-BB3C-C6DCCEEDF3C8.jpeg" alt="Memory 17" /></div>
         <div class="photo-card" onclick="zoomImage(this)"><img src="att.lOYG4l8el-rrCyNs972fbpsG83bXQJ0bFdNMa6PIQdY.jpg.jpeg" alt="Memory 18" /></div>
-     </div>
+      </div>
     </div>
 
-    <!-- Music Section -->
     <div id="musicView" class="section-view">
       <button class="back-btn" onclick="openSection('homeView')">← Back to Envelopes</button>
       <h1>Our Songs 🎵</h1>
       <p style="color: #777; font-size: 0.9rem; margin-bottom: 15px;">Songs that remind me of us ❤️</p>
       
       <div class="playlist-container">
-        <!-- Song 1 -->
         <div class="song-card">
           <div class="song-info">
             <div class="song-icon">🎶</div>
@@ -476,7 +472,6 @@
           <button class="play-btn" onclick="togglePlay('Patar_Bashori___Coke_Studio_Bangla___Season_4___Ishaan_x_Sunidhi___Adit_Rahman(256k).mp3', this)">▶</button>
         </div>
 
-        <!-- Song 2 -->
         <div class="song-card">
           <div class="song-info">
             <div class="song-icon">💖</div>
@@ -579,7 +574,6 @@
       document.getElementById('imageModal').style.display = 'none';
     }
 
-    /* Music Player Logic */
     let currentSong = "";
     let currentBtn = null;
     const audio = document.getElementById('globalAudio');
