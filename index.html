@@ -174,6 +174,67 @@
       pointer-events: none;
     }
 
+    /* Music Section Styling */
+    .playlist-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    .song-card {
+      background: #fff;
+      border: 1px solid #ffccd5;
+      padding: 15px 20px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+
+    .song-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .song-icon {
+      font-size: 1.8rem;
+    }
+
+    .song-title {
+      font-weight: 600;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    .song-subtitle {
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .play-btn {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .play-btn:active {
+      transform: scale(0.9);
+    }
+
     .letter-paper {
       background: #fffdf9;
       border: 1px solid #f3e5ab;
@@ -339,6 +400,10 @@
           <div class="icon">📸</div>
           <span>Sweet Memories</span>
         </div>
+        <div class="envelope-card" onclick="openSection('musicView')">
+          <div class="icon">🎵</div>
+          <span>Our Songs</span>
+        </div>
         <div class="envelope-card" onclick="openSection('letterView')">
           <div class="icon">💌</div>
           <span>My Letter</span>
@@ -392,6 +457,51 @@
      </div>
     </div>
 
+    <!-- Music Section -->
+    <div id="musicView" class="section-view">
+      <button class="back-btn" onclick="openSection('homeView')">← Back to Envelopes</button>
+      <h1>Our Songs 🎵</h1>
+      <p style="color: #777; font-size: 0.9rem; margin-bottom: 15px;">Songs that remind me of us ❤️</p>
+      
+      <div class="playlist-container">
+        <!-- Song 1 -->
+        <div class="song-card">
+          <div class="song-info">
+            <div class="song-icon">🎧</div>
+            <div>
+              <div class="song-title">Song Title 1</div>
+              <div class="song-subtitle">Artist Name</div>
+            </div>
+          </div>
+          <button class="play-btn" onclick="togglePlay('song1.mp3', this)">▶</button>
+        </div>
+
+        <!-- Song 2 -->
+        <div class="song-card">
+          <div class="song-info">
+            <div class="song-icon">🎼</div>
+            <div>
+              <div class="song-title">Song Title 2</div>
+              <div class="song-subtitle">Artist Name</div>
+            </div>
+          </div>
+          <button class="play-btn" onclick="togglePlay('song2.mp3', this)">▶</button>
+        </div>
+
+        <!-- Song 3 -->
+        <div class="song-card">
+          <div class="song-info">
+            <div class="song-icon">💖</div>
+            <div>
+              <div class="song-title">Song Title 3</div>
+              <div class="song-subtitle">Artist Name</div>
+            </div>
+          </div>
+          <button class="play-btn" onclick="togglePlay('song3.mp3', this)">▶</button>
+        </div>
+      </div>
+    </div>
+
     <div id="letterView" class="section-view">
       <button class="back-btn" onclick="openSection('homeView')">← Back to Envelopes</button>
       <h1>My Love Letter 💌</h1>
@@ -443,6 +553,8 @@
     <img id="enlargedImg" src="" alt="Enlarged View" />
   </div>
 
+  <audio id="globalAudio"></audio>
+
   <script>
     function openSection(sectionId) {
       document.querySelectorAll('.section-view').forEach(view => {
@@ -479,6 +591,34 @@
       document.getElementById('imageModal').style.display = 'none';
     }
 
+    /* Music Player Logic */
+    let currentSong = "";
+    let currentBtn = null;
+    const audio = document.getElementById('globalAudio');
+
+    function togglePlay(songUrl, btn) {
+      if (currentSong === songUrl) {
+        if (audio.paused) {
+          audio.play();
+          btn.innerText = "⏸";
+        } else {
+          audio.pause();
+          btn.innerText = "▶";
+        }
+      } else {
+        if (currentBtn) currentBtn.innerText = "▶";
+        audio.src = songUrl;
+        audio.play();
+        btn.innerText = "⏸";
+        currentSong = songUrl;
+        currentBtn = btn;
+      }
+
+      audio.onended = function() {
+        btn.innerText = "▶";
+      };
+    }
+
     const heartsContainer = document.getElementById('heartsContainer');
     const heartIcons = ['❤️', '💖', '💕', '💗', '🌸'];
 
@@ -489,8 +629,4 @@
       heart.style.left = Math.random() * 100 + 'vw';
       heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
       heart.style.animationDelay = Math.random() * 5 + 's';
-      heartsContainer.appendChild(heart);
-    }
-  </script>
-</body>
-</html>
+   
